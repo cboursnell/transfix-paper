@@ -1,0 +1,21 @@
+---
+:rice:
+  :reads:
+    :url:
+     - 'ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR037/SRR037736/SRR037736.sra'
+     - 'ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR037/SRR037737/SRR037737.sra'
+     - 'ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR037/SRR037738/SRR037738.sra'
+     - 'ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR037/SRR037735/SRR037735.sra'
+    :left:
+     - 'SRR037736_1.fastq'
+     - 'SRR037737_1.fastq'
+     - 'SRR037738_1.fastq'
+     - 'SRR037735_1.fastq'
+    :right:
+     - 'SRR037736_2.fastq'
+     - 'SRR037737_2.fastq'
+     - 'SRR037738_2.fastq'
+     - 'SRR037735_2.fastq'
+  :transcriptome:
+    :url: 'ftp://ftp.jgi-psf.org/pub/compgen/phytozome/v9.0/Osativa/annotation/Osativa_204_transcript.fa.gz'
+    :fa: 'Osativa_204_transcript.fa'

@@ -1,2 +1,3 @@
-require 'transfix-paper/transfix-paper.rb'
-require 'transfix-paper/version.rb'
+require 'transfix-paper/downloader'
+require 'transfix-paper/transfix-paper'
+require 'transfix-paper/version'
