@@ -21,7 +21,7 @@ module TransfixPaper
 
     def run left, right, reference, threads
       build_index reference, threads
-      map_reads(reference, left, right, threads: @threads)
+      map_reads(reference, left, right, threads: threads)
     end
 
     def build_paired_cmd l, r, threads

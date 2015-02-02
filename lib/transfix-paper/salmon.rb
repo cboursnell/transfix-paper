@@ -5,6 +5,8 @@ module TransfixPaper
 
   class Salmon
 
+    attr_accessor :quant_output
+
     def initialize
       which = Cmd.new('which salmon')
       which.run
@@ -15,17 +17,16 @@ module TransfixPaper
     end
 
     def run assembly, bamfile, threads=8
-      assembly = assembly.file if assembly.is_a? Assembly
       output = "quant.sf"
-      @fin_output = "#{File.basename assembly}_#{output}"
-      unless File.exist? @fin_output
+      @quant_output = "#{File.basename assembly}_#{output}"
+      unless File.exist? @quant_output
         salmon = Cmd.new build_command(assembly, bamfile, threads)
         salmon.run
         unless salmon.status.success?
           logger.error salmon.stderr
           raise SalmonError.new("Salmon failed")
         end
-        File.rename(output, @fin_output)
+        File.rename(output, @quant_output)
       end
       return 'postSample.bam'
     end

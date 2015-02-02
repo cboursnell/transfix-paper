@@ -54,7 +54,7 @@ module TransfixPaper
 
           # load expression quantification output
           # choose X transcripts that have expression over Y
-          quant = "quant.sf"
+          quant = salmon.quant_output
           expression = {}
           File.open(quant).each do |line|
             if line !~ /^#/
