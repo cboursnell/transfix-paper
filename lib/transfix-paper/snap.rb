@@ -54,15 +54,14 @@ module TransfixPaper
       @bam = File.expand_path("#{lbase}.#{rbase}.#{index}.bam")
       @read_count_file = "#{lbase}-#{rbase}-read_count.txt"
 
-      @fixer = Fixer.new # from the fix-trinity-output gem
       unless File.exists? @bam
         snapcmd = build_paired_cmd(left, right, threads)
         runner = Cmd.new snapcmd
-        # runner.run
-        # save_readcount runner.stdout
-        # unless runner.status.success?
-          # raise SnapError.new("Snap failed\n#{runner.stderr}")
-        # end
+        runner.run
+        save_readcount runner.stdout
+        unless runner.status.success?
+          raise SnapError.new("Snap failed\n#{runner.stderr}")
+        end
       else
         load_readcount left
       end
