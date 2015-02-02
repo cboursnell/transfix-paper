@@ -1,3 +1,6 @@
+require 'transfix-paper/cmd'
 require 'transfix-paper/downloader'
+require 'transfix-paper/salmon'
+require 'transfix-paper/snap'
 require 'transfix-paper/transfix-paper'
 require 'transfix-paper/version'

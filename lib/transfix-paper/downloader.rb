@@ -1,5 +1,6 @@
 
 require 'fixwhich'
+require 'open3'
 
 module TransfixPaper
 
@@ -7,8 +8,7 @@ module TransfixPaper
 
   class Downloader
 
-    def initialize(url, file)
-      @file = file
+    def initialize(url)
       @url = url
       @curl = Which::which('curl').first
       @wget = Which::which('wget').first
@@ -19,7 +19,7 @@ module TransfixPaper
     end
 
     def run
-      if !File.exist?(@file)
+      if !already_extracted(@url)
         target = File.basename(@url)
         if !File.exist?(target)
           if !download
@@ -37,7 +37,7 @@ module TransfixPaper
       if @wget
         cmd = "wget #{@url} -O #{File.basename(@url)}"
       elsif @curl
-        cmd = "curl #{@url} -o #{File.basename(@url)}"
+        cmd = "curl #{@url} -L -o #{File.basename(@url)}"
       else
         raise RuntimeError.new("Neither curl or wget installed")
       end
@@ -50,7 +50,6 @@ module TransfixPaper
     end
 
     def extract(name)
-      # puts "extract: name: #{name}"
       if name =~ /\.tar\.gz$/ or name =~ /\.tgz/
         cmd = "tar xzf #{name}"
       elsif name =~ /\.gz$/
@@ -62,9 +61,32 @@ module TransfixPaper
       else
         cmd = "echo extracted"
       end
-      # puts "extract cmd: #{cmd}"
       stdout, stderr, status = Open3.capture3 cmd
       return status.success?
+    end
+
+    def already_extracted url
+      name = File.basename(url)
+      if name =~ /\.sra$/
+        if File.exist?("#{File.basename(url, ".sra")}.fastq") or
+           File.exist?("#{File.basename(url, ".sra")}_1.fastq")
+          return true
+        end
+        return false
+      elsif name =~ /\.gz$/
+        file = File.basename(name, ".gz")
+      elsif name =~ /\.tar\.gz$/
+        file = File.basename(name, ".tar.gz")
+      elsif name =~ /\.zip$/
+        file = File.basename(name, ".zip")
+      else
+        file = name
+      end
+      if File.exist?(file)
+        return true
+      else
+        return false
+      end
     end
 
   end

@@ -55,9 +55,7 @@ class TestDownloader < Test::Unit::TestCase
       dl = TransfixPaper::Downloader.new(url, file)
       Dir.mktmpdir do |tmpdir|
         Dir.chdir(tmpdir) do |dir|
-          # assert_raise RuntimeError do
           assert_equal false, dl.run
-          # end
         end
       end
     end

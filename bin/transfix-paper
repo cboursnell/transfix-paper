@@ -1,1 +1,7 @@
 #!/usr/bin/env ruby
+
+require 'transfix-paper'
+
+paper = TransfixPaper::Paper.new
+
+paper.fragmentation
